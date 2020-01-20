@@ -14,9 +14,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    var overrideDefaultTip = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Possibly get default bill amount and tip index
+        let defaults = UserDefaults.standard
+        let prev_time = defaults.object(forKey: "last opened") as? NSDate
+        if (prev_time != nil && prev_time!.timeIntervalSinceNow < 10 * 60) {
+            billField.text = defaults.string(forKey: "saved bill")
+            overrideDefaultTip = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,12 +34,32 @@ class ViewController: UIViewController {
         // Get default tip amount
         let defaults   = UserDefaults.standard
         let defaultTip = defaults.integer(forKey: "default tip")
-        tipControl.selectedSegmentIndex = defaultTip
+        
+        if (overrideDefaultTip) {
+            overrideDefaultTip = false
+            tipControl.selectedSegmentIndex = defaults.integer(forKey: "saved tip")
+        }
+        else {
+            tipControl.selectedSegmentIndex = defaultTip
+        }
         
         calculateTip(tipControl as Any)
         
         // User only edits the textfield
         billField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Save bill amount
+        let defaults = UserDefaults.standard
+        defaults.set(billField.text, forKey: "saved bill")
+        
+        // Save current time
+        let time = NSDate()
+        defaults.set(time, forKey: "last opened")
+        
+        // Save current tip value
+        defaults.set(tipControl.selectedSegmentIndex, forKey: "saved tip")
     }
     
     func getBill() -> Double {
