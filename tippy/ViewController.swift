@@ -17,7 +17,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Get default tip amount
+        let defaults   = UserDefaults.standard
+        let defaultTip = defaults.integer(forKey: "default tip")
+        tipControl.selectedSegmentIndex = defaultTip
+        
+        calculateTip(tipControl as Any)
+        
+        // User only edits the textfield
+        billField.becomeFirstResponder()
     }
     
     func getBill() -> Double {
@@ -31,7 +44,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onTap(_ sender: Any) {
-        view.endEditing(true)
+        // view.endEditing(true)
         
         // Format bill field text
         let bill = getBill()

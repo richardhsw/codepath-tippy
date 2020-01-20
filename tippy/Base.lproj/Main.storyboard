@@ -19,7 +19,7 @@
                                 <rect key="frame" x="20" y="88" width="374" height="252"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kVW-It-34h" userLabel="BillAmount">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kVW-It-34h" userLabel="BillAmount">
                                         <rect key="frame" x="174" y="49" width="200" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -103,7 +103,13 @@
                             <outletCollection property="gestureRecognizers" destination="egn-Cb-4ZB" appends="YES" id="l4J-QS-kIc"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Tip Calculator" id="hUz-bn-lwm"/>
+                    <navigationItem key="navigationItem" title="Tip Calculator" id="hUz-bn-lwm">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="qfw-vy-wwu">
+                            <connections>
+                                <segue destination="kmA-1v-hiG" kind="show" id="G2D-Me-QWA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billField" destination="kVW-It-34h" id="CMd-we-TD5"/>
                         <outlet property="tipControl" destination="8Xo-ZS-6m1" id="uNg-8y-rmL"/>
@@ -119,6 +125,49 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="97.767857142857139"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="QPd-F1-cMW">
+            <objects>
+                <viewController id="kmA-1v-hiG" customClass="SettingsViewController" customModule="tippy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JvN-mj-31y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the Default Tip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYV-gJ-Olq" userLabel="Default Tip Label">
+                                <rect key="frame" x="20" y="108" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JbK-2T-oGl" userLabel="Tip Amount Select">
+                                <rect key="frame" x="20" y="144" width="374" height="32"/>
+                                <segments>
+                                    <segment title="15%"/>
+                                    <segment title="18%"/>
+                                    <segment title="20%"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yYV-gJ-Olq" firstAttribute="leading" secondItem="XFl-lM-8KH" secondAttribute="leading" constant="20" id="5vs-Zn-IFH"/>
+                            <constraint firstItem="XFl-lM-8KH" firstAttribute="trailing" secondItem="yYV-gJ-Olq" secondAttribute="trailing" constant="20" id="VEr-ro-svR"/>
+                            <constraint firstItem="yYV-gJ-Olq" firstAttribute="top" secondItem="XFl-lM-8KH" secondAttribute="top" constant="20" id="VkT-IU-zAf"/>
+                            <constraint firstItem="JbK-2T-oGl" firstAttribute="trailing" secondItem="yYV-gJ-Olq" secondAttribute="trailing" id="Y0K-jZ-NQ2"/>
+                            <constraint firstItem="JbK-2T-oGl" firstAttribute="top" secondItem="yYV-gJ-Olq" secondAttribute="bottom" constant="15" id="eyi-Og-sU8"/>
+                            <constraint firstItem="JbK-2T-oGl" firstAttribute="leading" secondItem="yYV-gJ-Olq" secondAttribute="leading" id="rzt-u9-rHx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XFl-lM-8KH"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fvZ-1y-xAP"/>
+                    <connections>
+                        <outlet property="tipSelect" destination="JbK-2T-oGl" id="aAZ-ng-PAr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9L6-eD-ne2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wsg-q7-FWT">
