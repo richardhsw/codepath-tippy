@@ -22,6 +22,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
  - [x] Bill amount text field has automatic dollar formatting when user taps anywhere on the screen.
+ - [x] User can clear text field whenever to re-enter bill amount.
 
 ## Video Walkthrough 
 
